@@ -1,0 +1,18 @@
+@font-face {
+	font-family: "Roboto-Thin";
+	src: url("../fonts/roboto/Roboto-Thin.ttf");
+}
+@font-face {
+	font-family: "Roboto-Regular";
+	src: url("../fonts/roboto/Roboto-Regular.ttf");
+}
+body {
+	font-family: Roboto-Regular, sans-serif;
+	transition: all 0.5s;
+	background-color: #ffffff;
+}
+.mainCons {
+}
+.listItemEditBtns {
+	font-size: 1.3rem;
+}
