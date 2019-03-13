@@ -9,10 +9,34 @@
 body {
 	font-family: Roboto-Regular, sans-serif;
 	transition: all 0.5s;
-	background-color: #ffffff;
+	background-color: #0079bf;
 }
 .mainCons {
 }
+
+.toDoLists {
+	width: 20vw;
+	margin-right: 1vw;
+}
+
+.listItems * {
+	cursor: pointer;
+}
+
 .listItemEditBtns {
 	font-size: 1.3rem;
+}
+
+#newListBtn {
+	height: fit-content;
+}
+
+.btn-newList {
+	background: rgba(0, 0, 0, 0.2);
+	color: hsla(0, 0%, 80%, 1);
+}
+
+.btn-newList:hover {
+	background: rgba(0, 0, 0, 0.4);
+	color: hsla(0, 0%, 80%, 1);
 }
