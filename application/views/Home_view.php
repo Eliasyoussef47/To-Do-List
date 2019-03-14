@@ -1,66 +1,7 @@
-<div id="toDoListsMainCon" class="d-inline-flex">
-    <div class="list-group toDoLists">
-        <div class="list-group-item list-group-item-action list-group-item-primary active">
-            Cras justo odio
-        </div>
-        <div class="custom-control custom-checkbox list-group-item listItems list-group-item-action pl-5">
-            <input type="checkbox" class="custom-control-input" id="customCheck1">
-            <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
-            <i class="fas fa-edit text-primary float-right listItemEditBtns"></i>
-        </div>
-        <div class="custom-control custom-checkbox list-group-item listItems list-group-item-action pl-5">
-            <input type="checkbox" class="custom-control-input" id="customCheck2">
-            <label class="custom-control-label" for="customCheck2">Check this custom checkbox</label>
-            <i class="fas fa-edit text-primary float-right listItemEditBtns"></i>
-        </div>
-        <div class="custom-control custom-checkbox list-group-item listItems list-group-item-action pl-5">
-            <input type="checkbox" class="custom-control-input" id="customCheck3">
-            <label class="custom-control-label" for="customCheck3">Check this custom checkbox</label>
-            <i class="fas fa-edit text-primary float-right listItemEditBtns"></i>
-        </div>
-        <div class="custom-control custom-checkbox list-group-item listItems list-group-item-action pl-5">
-            <input type="checkbox" class="custom-control-input" id="customCheck4">
-            <label class="custom-control-label" for="customCheck4">Check this custom checkbox</label>
-            <i class="fas fa-edit text-primary float-right listItemEditBtns"></i>
-        </div>
-        <div class="custom-control custom-checkbox list-group-item listItems list-group-item-action pl-5">
-            <input type="checkbox" class="custom-control-input" id="customCheck5">
-            <label class="custom-control-label" for="customCheck5">Check this custom checkbox</label>
-            <i class="fas fa-edit text-primary float-right listItemEditBtns"></i>
-        </div>
-    </div>
-    <div class="list-group toDoLists">
-        <div class="list-group-item list-group-item-action list-group-item-primary active">
-            Cras justo odio
-        </div>
-        <div class="custom-control custom-checkbox list-group-item listItems list-group-item-action pl-5">
-            <input type="checkbox" class="custom-control-input" id="customCheck1">
-            <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
-            <i class="fas fa-edit text-primary float-right listItemEditBtns"></i>
-        </div>
-        <div class="custom-control custom-checkbox list-group-item listItems list-group-item-action pl-5">
-            <input type="checkbox" class="custom-control-input" id="customCheck2">
-            <label class="custom-control-label" for="customCheck2">Check this custom checkbox</label>
-            <i class="fas fa-edit text-primary float-right listItemEditBtns"></i>
-        </div>
-        <div class="custom-control custom-checkbox list-group-item listItems list-group-item-action pl-5">
-            <input type="checkbox" class="custom-control-input" id="customCheck3">
-            <label class="custom-control-label" for="customCheck3">Check this custom checkbox</label>
-            <i class="fas fa-edit text-primary float-right listItemEditBtns"></i>
-        </div>
-        <div class="custom-control custom-checkbox list-group-item listItems list-group-item-action pl-5">
-            <input type="checkbox" class="custom-control-input" id="customCheck4">
-            <label class="custom-control-label" for="customCheck4">Check this custom checkbox</label>
-            <i class="fas fa-edit text-primary float-right listItemEditBtns"></i>
-        </div>
-        <div class="custom-control custom-checkbox list-group-item listItems list-group-item-action pl-5">
-            <input type="checkbox" class="custom-control-input" id="customCheck5">
-            <label class="custom-control-label" for="customCheck5">Check this custom checkbox</label>
-            <i class="fas fa-edit text-primary float-right listItemEditBtns"></i>
-        </div>
-    </div>
-</div>
+<div id="toDoListsMainCon" class="d-inline-flex"></div>
 <button type="button" class="btn btn-newList inline-block col-1" id="newListBtn"><i class="fas fa-plus"></i> New list</button>
+
+<img id="rightBottomLoadingCircle" src="<?php echo base_url();?>assets/images/loading-red.svg" alt="Loading...">
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -82,3 +23,12 @@
         </div>
     </div>
 </div>
+
+<div id="fullScreanLoadingBackground">
+    <img id="fullScreanLoadingCircle" src="<?php echo base_url();?>assets/images/loading.svg" alt="Loading...">
+</div>
+<script>
+    window.onload = function () {
+        getListsFromServer();
+    };
+</script>
