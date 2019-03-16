@@ -1,5 +1,5 @@
 <?php
-class Home_model extends CI_Model {
+class API_model extends CI_Model {
 	public function getAllLists() {
 		$this->load->database();
         $this->db->select('*');
@@ -11,5 +11,13 @@ class Home_model extends CI_Model {
 		} else { 
 			return false;
 		}
+	}
+
+	public function updateList($updateData) {
+        $this->load->database();
+        $listId = $updateData["listId"];
+        unset($updateData["listId"]);
+        $query = $this->db->update('lists', $updateData, "listId = " . $listId);
+        return $query;
 	}
 }
