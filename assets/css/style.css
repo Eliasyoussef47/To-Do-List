@@ -10,6 +10,7 @@ body {
 	font-family: Roboto-Regular, sans-serif;
 	transition: all 0.5s;
 	background-color: #0079bf;
+	height: 100vh;
 }
 .mainCons {
 }
@@ -19,15 +20,19 @@ body {
 	margin-right: 1vw;
 }
 
+.listItemEditBtns, .listItemOptionsBtns {
+	cursor: pointer;
+}
+
 .listItems * {
 	cursor: pointer;
 }
 
-.listItemEditBtns {
+.listItemEditBtns, .listItemAddBtns, .listItemOptionsBtns {
 	font-size: 1.3rem;
 }
 
-#newListBtn {
+#newListBtn , .hFit{
 	height: fit-content;
 }
 
@@ -66,4 +71,15 @@ body {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+}
+
+.toDoListBody {
+	padding: 0 !important;
+}
+
+.toDoListBody * {
+	border-right: 0 !important;
+	border-left: 0 !important;
+	border-bottom: 0 !important;
+	border-radius: 0 !important;
 }
