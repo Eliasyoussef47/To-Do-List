@@ -1,7 +1,7 @@
 <div id="toDoListsMainCon" class="d-inline-flex"></div>
 <button type="button" class="btn btn-newList inline-block col-1" id="newListBtn"><i class="fas fa-plus"></i> New list</button>
-
-<button type="button" class="btn btn-primary mx-2 hFit" data-toggle="modal" data-target="#editModal">//TEST
+<!--TEST-->
+<button type="button" class="btn btn-primary mx-2 hFit" data-toggle="modal" data-target="#editModal">
     Launch demo modal
 </button>
 
@@ -23,16 +23,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="listNameInput">List name:</label>
-                    <input type="text" class="form-control" id="listNameInput" placeholder="List name">
+            <form id="editModalForm">
+                <div class="modal-body">DO YOU KNOW DE WHEY</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
