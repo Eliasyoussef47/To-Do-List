@@ -23,7 +23,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="editModalForm">
+            <form id="editModalForm" class="modalForm">
                 <div class="modal-body">DO YOU KNOW DE WHEY</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
