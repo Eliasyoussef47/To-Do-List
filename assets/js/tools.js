@@ -31,11 +31,11 @@ function stopFullScreenLoading() {
 }
 
 function startMediumLoading() {
-    showElementT(fullScreanLoadingBackground);
+    showElement(rightBottomLoadingCircle);
 }
 
 function stopMediumLoading() {
-    hideElementT(fullScreanLoadingBackground);
+    hideElement(rightBottomLoadingCircle);
 }
 
 function makeLists(array) {
@@ -65,21 +65,26 @@ function makeLists(array) {
             listHeader = document.createElement("DIV");
             listHeader.className = "list-group-item list-group-item-action list-group-item-primary active toDoListHeader";
             listHeaderTitle = document.createElement("SPAN");
+            listHeaderTitle.className = "toDoListHeaderTitle";
             listHeaderTitle.innerText = currentElm.listName;
             listHeader.appendChild(listHeaderTitle);
             listItemEditBtnWrap = document.createElement("DIV");
             listItemEditBtnWrap.className = "float-right ml-2";
+            let modalData = {
+                listId: currentElm.listId,
+                listName: currentElm.listName
+            };
             listItemEditBtnWrap.onclick = function() {
-                setUpModal(document.getElementById("editModal"), "Edit list", "list");
+                setUpModal(document.getElementById("editModal"), "Edit list", "updateList", modalData);
                 $("#editModal").modal("show");
             };
             listItemEditBtn = document.createElement("I");
-            listItemEditBtn.className = "fas fa-edit text-primary listItemEditBtns";
+            listItemEditBtn.className = "fas fa-edit text-light listItemEditBtns";
             listItemEditBtnWrap.appendChild(listItemEditBtn);
             listItemOptionsBtnWrap = document.createElement("DIV");
             listItemOptionsBtnWrap.className = "btn-group dropleft float-right ml-2";
             listItemOptionsBtn = document.createElement("I");
-            listItemOptionsBtn.className = "fas fa-ellipsis-v text-primary listItemOptionsBtns";
+            listItemOptionsBtn.className = "fas fa-ellipsis-v text-light listItemOptionsBtns";
             listItemOptionsBtn.dataset.toggle = "dropdown";
             listItemOptionsBtnWrap.appendChild(listItemOptionsBtn);
             listItemOptionsBtnDropdownMenu = document.createElement("DIV");
@@ -134,4 +139,12 @@ function removeChildren(parentElement) {
     while (parentElement.firstChild) {
         parentElement.removeChild(parentElement.firstChild);
     }
+}
+
+function getFormValues(form) {
+    let values = {};
+    form.querySelectorAll("input, select").forEach((element) => {
+        values[element.name] = element.value;
+    });
+    return values;
 }
