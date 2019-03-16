@@ -4,7 +4,7 @@ class Home_model extends CI_Model {
 		$this->load->database();
         $this->db->select('*');
         $this->db->from('lists');
-        $this->db->join('listsItems', 'listsItems.listId = lists.listId');
+        $this->db->join('listsItems', 'lists.listId = listsItems.listId', 'left');
         $query = $this->db->get();
 		if ($query->num_rows() > 0) {
 			return $query->result_array();
