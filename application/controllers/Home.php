@@ -9,11 +9,4 @@ class Home extends CI_Controller {
 		$this->load->view('Home_view');
         $this->load->view('templates/footer_view');
 	}
-
-	public function allLists()
-	{
-        $this->load->model( 'Home_model' );
-        $lists = $this->Home_model->getAllLists();
-        echo(json_encode($lists));
-	}
 }
