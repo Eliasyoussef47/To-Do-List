@@ -47,6 +47,7 @@ function makeLists(array) {
     let listItem;
     let listItemCheckbox;
     let listItemCheckboxLabel;
+    let listItemEditBtnWrap;
     let listItemEditBtn;
     let listItemOptionsBtnWrap;
     let listItemOptionsBtn;
@@ -60,17 +61,25 @@ function makeLists(array) {
         if (currentListId !== currentElm.listId) {
             listConDiv = document.createElement("DIV");
             listConDiv.className = "list-group toDoLists";
+            listConDiv.dataset.listId = currentElm.listId;
             listHeader = document.createElement("DIV");
             listHeader.className = "list-group-item list-group-item-action list-group-item-primary active toDoListHeader";
             listHeaderTitle = document.createElement("SPAN");
             listHeaderTitle.innerText = currentElm.listName;
             listHeader.appendChild(listHeaderTitle);
+            listItemEditBtnWrap = document.createElement("DIV");
+            listItemEditBtnWrap.className = "float-right ml-2";
+            listItemEditBtnWrap.onclick = function() {
+                setUpModal(document.getElementById("editModal"), "Edit list", "list");
+                $("#editModal").modal("show");
+            };
             listItemEditBtn = document.createElement("I");
-            listItemEditBtn.className = "fas fa-edit text-primary float-right listItemEditBtns";
+            listItemEditBtn.className = "fas fa-edit text-primary listItemEditBtns";
+            listItemEditBtnWrap.appendChild(listItemEditBtn);
             listItemOptionsBtnWrap = document.createElement("DIV");
             listItemOptionsBtnWrap.className = "btn-group dropleft float-right ml-2";
             listItemOptionsBtn = document.createElement("I");
-            listItemOptionsBtn.className = "fas fa-ellipsis-v text-primary float-right ml-2 listItemOptionsBtns";
+            listItemOptionsBtn.className = "fas fa-ellipsis-v text-primary listItemOptionsBtns";
             listItemOptionsBtn.dataset.toggle = "dropdown";
             listItemOptionsBtnWrap.appendChild(listItemOptionsBtn);
             listItemOptionsBtnDropdownMenu = document.createElement("DIV");
@@ -82,7 +91,7 @@ function makeLists(array) {
             listItemOptionsBtnDropdownMenu.appendChild(listItemOptionsBtnDropdownMenuOption);
             listItemOptionsBtnWrap.appendChild(listItemOptionsBtnDropdownMenu);
             listHeader.appendChild(listItemOptionsBtnWrap);
-            listHeader.appendChild(listItemEditBtn);
+            listHeader.appendChild(listItemEditBtnWrap);
             listConDiv.appendChild(listHeader);
             toDoListsMainCon.appendChild(listConDiv);
             currentListId = currentElm.listId;
@@ -119,4 +128,10 @@ function makeLists(array) {
             listConDiv.appendChild(listFooter);
         }
     })
+}
+
+function removeChildren(parentElement) {
+    while (parentElement.firstChild) {
+        parentElement.removeChild(parentElement.firstChild);
+    }
 }
