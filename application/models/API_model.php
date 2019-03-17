@@ -49,7 +49,7 @@ class API_model extends CI_Model {
         $this->load->database();
         $this->db->where('listItemId', $listItemId);
         $this->db->where('listId', $listId);
-        $query = $this->db->update('lists', $updateData);
+        $query = $this->db->update('listsItems', $updateData);
         return $query;
 	}
 }
