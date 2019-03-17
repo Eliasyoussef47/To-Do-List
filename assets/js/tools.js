@@ -134,7 +134,7 @@ function makeLists(array) {
                 listItemStatus: currentElm.listItemStatus
             };
             listItemCheckbox.onchange = function() {
-                updateData.listItemStatus = listItemCheckbox.checked;
+                updateData.listItemStatus = this.checked;
                 updateListItemStatus(updateData);
             };
             listItem.appendChild(listItemCheckbox);
