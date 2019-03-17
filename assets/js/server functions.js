@@ -106,3 +106,24 @@ function updateListItem(updateData) {
             console.log(error.body);
         });
 }
+
+function updateListItemStatus(updateData) {
+    startMediumLoading();
+    let updateDataString = JSON.stringify(updateData);
+    let searchParams = new URLSearchParams();
+    searchParams.append('updateData', updateDataString);
+    const myInit = {
+        method: 'POST',
+        credentials: 'include',
+        body: searchParams
+    };
+    return fetch("http://localhost/To-Do-List/API/updateListItemStatus", myInit)
+        .then(function(response) {
+            stopMediumLoading();
+            return response.text();
+        }).then(function(responseText) {
+            console.log(responseText);
+        }).catch(function (error) {
+            console.log(error.body);
+        });
+}
