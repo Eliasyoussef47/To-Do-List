@@ -96,7 +96,7 @@ function updateListItem(updateData) {
         credentials: 'include',
         body: searchParams
     };
-    return fetch("http://localhost/To-Do-List/API/updateList", myInit)
+    return fetch("http://localhost/To-Do-List/API/updateListItem", myInit)
         .then(function(response) {
             stopMediumLoading();
             return response.text();
