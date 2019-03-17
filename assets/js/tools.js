@@ -38,6 +38,17 @@ function stopMediumLoading() {
     hideElement(rightBottomLoadingCircle);
 }
 
+function startModalLoading(modal) {
+    let modalBody = modal.querySelector("div.modal-body");
+    removeChildren(modalBody);
+    modalBody.innerHTML = "Loading...";
+    showElement(modalLoadingCircle);
+}
+
+function stopModalLoading() {
+    hideElement(modalLoadingCircle);
+}
+
 function makeLists(array) {
     let currentListId = "0";
     let listConDiv;
@@ -75,7 +86,7 @@ function makeLists(array) {
                 listName: currentElm.listName
             };
             listItemEditBtnWrap.onclick = function() {
-                setUpModal(document.getElementById("editModal"), "Edit list", "updateList", modalData);
+                getList(modalData).then(json => setUpModal(document.getElementById("editModal"), "Edit list", "updateList", json));
                 $("#editModal").modal("show");
             };
             listItemEditBtn = document.createElement("I");
@@ -103,22 +114,36 @@ function makeLists(array) {
             listBody = document.createElement("DIV");
             listBody.className = "list-group-item toDoListBody";
         }
-        if (currentElm.itemId != null) {
+        if (currentElm.listItemId != null) {
             listItem = document.createElement("DIV");
             listItem.className = "custom-control custom-checkbox list-group-item listItems list-group-item-action pl-5";
             listItemCheckbox = document.createElement("INPUT");
             listItemCheckbox.type = "checkbox";
             listItemCheckbox.className = "custom-control-input";
-            listItemCheckbox.id = "listItemCheckbox" + currentElm.listId + "_" + currentElm.itemId;
+            listItemCheckbox.id = "listItemCheckbox" + currentElm.listId + "_" + currentElm.listItemId;
             listItem.appendChild(listItemCheckbox);
             listItemCheckboxLabel = document.createElement("LABEL");
             listItemCheckboxLabel.className = "custom-control-label";
-            listItemCheckboxLabel.setAttribute("for", "listItemCheckbox" + currentElm.listId + "_" + currentElm.itemId);
-            listItemCheckboxLabel.innerText = currentElm.itemName;
+            listItemCheckboxLabel.setAttribute("for", "listItemCheckbox" + currentElm.listId + "_" + currentElm.listItemId);
+            listItemCheckboxLabel.innerText = currentElm.listItemName;
             listItem.appendChild(listItemCheckboxLabel);
+            listItemEditBtnWrap = document.createElement("DIV");
+            listItemEditBtnWrap.className = "float-right ml-2";
+            let modalData = {
+                listItemId: currentElm.listItemId,
+                listId: currentElm.listId,
+                listItemName: currentElm.listItemName,
+                listItemDuration: currentElm.listItemDuration,
+                listItemStatus: currentElm.listItemStatus
+            };
+            listItemEditBtnWrap.onclick = function() {
+                getListItem(modalData).then(json => setUpModal(document.getElementById("editModal"), "Edit list item", "updateListItem", json));
+                $("#editModal").modal("show");
+            };
             listItemEditBtn = document.createElement("I");
-            listItemEditBtn.className = "fas fa-edit text-primary float-right listItemEditBtns";
-            listItem.appendChild(listItemEditBtn);
+            listItemEditBtn.className = "fas fa-edit text-primary listItemEditBtns";
+            listItemEditBtnWrap.appendChild(listItemEditBtn);
+            listItem.appendChild(listItemEditBtnWrap);
             listBody.appendChild(listItem);
         }
         if ((nextArrayElement === undefined || nextArrayElement.listId === null) || parseInt(nextArrayElement.listId) > parseInt(currentElm.listId)) {//als de volgende listId hoger is dan de huidige
