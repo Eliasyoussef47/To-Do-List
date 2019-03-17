@@ -1,17 +1,30 @@
-function setUpModal(modal, title, mode, data) {
-    let relevantServerFunction = {
+function setUpModal(modal, title, mode, data = null) {
+    let relevantSetUpPromise = {
+        "insertListItem": null,
+        "updateList": getList,
+        "updateListItem": getListItem
+    };let relevantServerFunction = {
+        "insertListItem": insertListItem,
         "updateList": updateList,
         "updateListItem": updateListItem
     };
     let relevantVisualServerFunction = {
+        "insertListItem": insertListItemVisual,
         "updateList": updateListVisual,
         "updateListItem": updateListItemVisual
     };
     let modalBody = modal.querySelector("div.modal-body");
     let modalForm = modal.querySelector("form.modalForm");
     modal.querySelector(".modal-title").innerHTML = title;
-    removeChildren(modalBody);
-    modalBody.appendChild(getModalForm(mode, data));
+    if (relevantSetUpPromise[mode] !== null) {
+        relevantSetUpPromise[mode](data).then(requestData => {
+            removeChildren(modalBody);
+            modalBody.appendChild(getModalForm(mode, requestData));
+        });
+    } else {
+        removeChildren(modalBody);
+        modalBody.appendChild(getModalForm(mode, data));
+    }
     modalForm.onsubmit = function () {
         event.preventDefault();
         relevantServerFunction[mode](getFormValues(modalForm));
@@ -20,8 +33,8 @@ function setUpModal(modal, title, mode, data) {
     };
 }
 
-function getModalForm(mode, data) {
-    let modes = ["updateList", "updateListItem", "newList"];
+function getModalForm(mode, data = null) {
+    let modes = ["insertListItem", "updateList", "updateListItem", "newList"];
     if (!modes.includes(mode)) {
         return false;
     }
@@ -51,7 +64,7 @@ function getModalForm(mode, data) {
         formGroupDivInput.placeholder = "List name";
         formGroupDiv.appendChild(formGroupDivInput);
         return formGroupDiv;
-    } else if (mode === "updateListItem") {
+    } else if (mode === "updateListItem" || mode === "insertListItem") {
         wrapperDiv = document.createElement("DIV");
         formGroupDivInput = document.createElement("INPUT");
         formGroupDivInput.type = "text";
