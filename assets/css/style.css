@@ -46,6 +46,11 @@ body {
 	color: hsla(0, 0%, 80%, 1);
 }
 
+#modalLoadingCircle {
+	width: 2rem;
+	display: none;
+}
+
 #rightBottomLoadingCircle {
 	position: absolute;
 	right: 10px;
