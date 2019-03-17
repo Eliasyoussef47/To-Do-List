@@ -26,7 +26,6 @@ class API extends CI_Controller {
             $query = $this->API_model->getList($requestData);
             echo(json_encode($query));
         }
-
     }
 
     public function getListItem()
@@ -40,7 +39,6 @@ class API extends CI_Controller {
             $query = $this->API_model->getListItem($requestData);
             echo(json_encode($query));
         }
-
     }
 
     public function updateList()
@@ -74,6 +72,22 @@ class API extends CI_Controller {
             $query = $this->API_model->updateListItem($updateData, $listItemId, $listId);
             echo $query;
         }
+    }
 
+    public function updateListItemStatus()
+    {
+        if ($this->input->post('updateData') === null) {
+            http_response_code(400);
+            echo '<h1>400 Bad Request</h1>';
+        } else {
+            $updateData = json_decode($this->input->post('updateData'), true);
+            $this->load->model('API_model');
+            $listItemId = $updateData["listItemId"];
+            $listId = $updateData["listId"];
+            unset($updateData["listId"]);
+            unset($updateData["listItemId"]);
+            $query = $this->API_model->updateListItem($updateData, $listItemId, $listId);
+            echo $query;
+        }
     }
 }
