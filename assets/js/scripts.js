@@ -1,3 +1,3 @@
 window.onload = function() {
-    getListsFromServer().then(response => makeLists(response));
+    getAllLists().then(response => makeLists(response));
 };
