@@ -18,7 +18,7 @@ function getAllLists() {
 }
 
 function getList(requestData) {
-    startModalLoading();
+    startModalLoading(editModal);
     let requestDataString = JSON.stringify(requestData);
     let searchParams = new URLSearchParams();
     searchParams.append('requestData', requestDataString);
