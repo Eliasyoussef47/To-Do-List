@@ -24,8 +24,9 @@
                 </button>
             </div>
             <form id="editModalForm" class="modalForm">
-                <div class="modal-body">DO YOU KNOW DE WHEY</div>
+                <div class="modal-body">Loading...</div>
                 <div class="modal-footer">
+                    <img id="modalLoadingCircle" src="<?php echo base_url();?>assets/images/loading-red.svg" alt="Loading...">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
