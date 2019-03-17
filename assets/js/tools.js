@@ -116,14 +116,19 @@ function makeLists(array) {
         }
         if (currentElm.listItemId != null) {
             listItem = document.createElement("DIV");
-            listItem.className = "custom-control custom-checkbox list-group-item listItems list-group-item-action pl-5";
+            listItem.className = "custom-control custom-checkbox list-group-item listItems list-group-item-action pl-5 listItem";
             listItemCheckbox = document.createElement("INPUT");
             listItemCheckbox.type = "checkbox";
-            listItemCheckbox.className = "custom-control-input";
+            listItemCheckbox.className = "custom-control-input listItemCheckbox";
             listItemCheckbox.id = "listItemCheckbox" + currentElm.listId + "_" + currentElm.listItemId;
+            if (currentElm.listItemStatus === "0") {
+                listItemCheckbox.checked = false;
+            } else if (currentElm.listItemStatus === "1") {
+                listItemCheckbox.checked = true;
+            }
             listItem.appendChild(listItemCheckbox);
             listItemCheckboxLabel = document.createElement("LABEL");
-            listItemCheckboxLabel.className = "custom-control-label";
+            listItemCheckboxLabel.className = "custom-control-label listItemTitle";
             listItemCheckboxLabel.setAttribute("for", "listItemCheckbox" + currentElm.listId + "_" + currentElm.listItemId);
             listItemCheckboxLabel.innerText = currentElm.listItemName;
             listItem.appendChild(listItemCheckboxLabel);
