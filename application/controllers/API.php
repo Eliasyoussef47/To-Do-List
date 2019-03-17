@@ -51,7 +51,9 @@ class API extends CI_Controller {
         } else {
             $updateData = json_decode($this->input->post('updateData'), true);
             $this->load->model('API_model');
-            $query = $this->API_model->updateList($updateData);
+            $listId = $updateData["listId"];
+            unset($updateData["listId"]);
+            $query = $this->API_model->updateList($updateData, $listId);
             echo $query;
         }
 
