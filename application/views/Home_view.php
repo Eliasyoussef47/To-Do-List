@@ -1,18 +1,6 @@
 <div id="toDoListsMainCon" class="d-inline-flex"></div>
 <button type="button" class="btn btn-newList inline-block col-1" id="newListBtn"><i class="fas fa-plus"></i> New list</button>
-<!--TEST-->
-<button type="button" class="btn btn-primary mx-2 hFit" data-toggle="modal" data-target="#editModal">
-    Launch demo modal
-</button>
-
-<script>
-    // butto.onclick = function () {
-    //     setUpModal(editModal, "HEEEY", "list");
-    // }
-</script>
-
 <img id="rightBottomLoadingCircle" src="<?php echo base_url();?>assets/images/loading-red.svg" alt="Loading...">
-
 <!-- Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -38,6 +26,3 @@
 <div id="fullScreanLoadingBackground">
     <img id="fullScreanLoadingCircle" src="<?php echo base_url();?>assets/images/loading.svg" alt="Loading...">
 </div>
-<script>
-
-</script>
