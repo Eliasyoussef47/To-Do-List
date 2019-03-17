@@ -59,6 +59,12 @@ function getModalForm(mode, data) {
         formGroupDivInput.hidden = true;
         formGroupDivInput.value = data.listItemId;
         wrapperDiv.appendChild(formGroupDivInput);
+        formGroupDivInput = document.createElement("INPUT");
+        formGroupDivInput.type = "text";
+        formGroupDivInput.name = "listId";
+        formGroupDivInput.hidden = true;
+        formGroupDivInput.value = data.listId;
+        wrapperDiv.appendChild(formGroupDivInput);
         formGroupDiv = document.createElement("DIV");
         formGroupDiv.className = "form-group";
         wrapperDiv.appendChild(formGroupDiv);
