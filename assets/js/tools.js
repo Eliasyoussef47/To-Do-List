@@ -67,6 +67,7 @@ function makeLists(array) {
     let listFooter;
     let listItemAddBtns;
     let nextArrayElement;
+
     array.forEach(function(currentElm, index, array) {
         nextArrayElement = array[(index + 1)];
         if (currentListId !== currentElm.listId) {
@@ -127,6 +128,15 @@ function makeLists(array) {
             } else if (currentElm.listItemStatus === "1") {
                 listItemCheckbox.checked = true;
             }
+            let updateData = {
+                listItemId: currentElm.listItemId,
+                listId: currentElm.listId,
+                listItemStatus: currentElm.listItemStatus
+            };
+            listItemCheckbox.onchange = function() {
+                updateData.listItemStatus = listItemCheckbox.checked;
+                updateListItemStatus(updateData);
+            };
             listItem.appendChild(listItemCheckbox);
             listItemCheckboxLabel = document.createElement("LABEL");
             listItemCheckboxLabel.className = "custom-control-label listItemTitle";
