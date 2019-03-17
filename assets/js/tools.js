@@ -87,7 +87,9 @@ function makeLists(array) {
                 listName: currentElm.listName
             };
             listItemEditBtnWrap.onclick = function() {
-                getList(modalData).then(json => setUpModal(document.getElementById("editModal"), "Edit list", "updateList", json));
+                getList(modalData).then(json => {
+                    setUpModal(document.getElementById("editModal"), "Edit list", "updateList", json);
+                });
                 $("#editModal").modal("show");
             };
             listItemEditBtn = document.createElement("I");
@@ -152,7 +154,9 @@ function makeLists(array) {
                 listItemDuration: currentElm.listItemDuration
             };
             listItemEditBtnWrap.onclick = function() {
-                getListItem(modalData).then(json => setUpModal(document.getElementById("editModal"), "Edit list item", "updateListItem", json));
+                getListItem(modalData).then(json => {
+                    setUpModal(document.getElementById("editModal"), "Edit list item", "updateListItem", json);
+                });
                 $("#editModal").modal("show");
             };
             listItemEditBtn = document.createElement("I");
@@ -163,10 +167,13 @@ function makeLists(array) {
         }
         if ((nextArrayElement === undefined || nextArrayElement.listId === null) || parseInt(nextArrayElement.listId) > parseInt(currentElm.listId)) {//als de volgende listId hoger is dan de huidige
             listConDiv.appendChild(listBody);
-            listFooter = document.createElement("A");
-            listFooter.href = "#";
+            listFooter = document.createElement("DIV");
             listFooter.className = "list-group-item list-group-item-action list-group-item-primary toDoListFooter";
             listFooter.innerText = "Add a new card";
+            listFooter.onclick = function() {
+                getList(modalData).then(json => setUpModal(document.getElementById("editModal"), "Edit list", "updateList", json));
+                $("#editModal").modal("show");
+            };
             listItemAddBtns = document.createElement("I");
             listItemAddBtns.className = "fas fa-plus float-right listItemAddBtns";
             listFooter.appendChild(listItemAddBtns);
