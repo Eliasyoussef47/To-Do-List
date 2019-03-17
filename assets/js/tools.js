@@ -87,9 +87,7 @@ function makeLists(array) {
                 listName: currentElm.listName
             };
             listItemEditBtnWrap.onclick = function() {
-                getList(modalData).then(json => {
-                    setUpModal(document.getElementById("editModal"), "Edit list", "updateList", json);
-                });
+                setUpModal(document.getElementById("editModal"), "Edit list", "updateList", modalData);
                 $("#editModal").modal("show");
             };
             listItemEditBtn = document.createElement("I");
@@ -154,9 +152,7 @@ function makeLists(array) {
                 listItemDuration: currentElm.listItemDuration
             };
             listItemEditBtnWrap.onclick = function() {
-                getListItem(modalData).then(json => {
-                    setUpModal(document.getElementById("editModal"), "Edit list item", "updateListItem", json);
-                });
+                setUpModal(document.getElementById("editModal"), "Edit list item", "updateListItem", modalData);
                 $("#editModal").modal("show");
             };
             listItemEditBtn = document.createElement("I");
@@ -171,7 +167,7 @@ function makeLists(array) {
             listFooter.className = "list-group-item list-group-item-action list-group-item-primary toDoListFooter";
             listFooter.innerText = "Add a new card";
             listFooter.onclick = function() {
-                getList(modalData).then(json => setUpModal(document.getElementById("editModal"), "Edit list", "updateList", json));
+                setUpModal(document.getElementById("editModal"), "Add a new card", "insertListItem", null);
                 $("#editModal").modal("show");
             };
             listItemAddBtns = document.createElement("I");
