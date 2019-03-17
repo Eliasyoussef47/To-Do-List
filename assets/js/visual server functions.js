@@ -6,6 +6,7 @@ function updateListVisual(updateData) {
 
 function updateListItemVisual(updateData) {
     let list = document.querySelector("[data-list-id='" + updateData.listId + "']");
-    let listItemTitle = list.querySelector("div.toDoListBody > div.listItem > label.listItemTitle");
+    let listItem = list.querySelector("div.toDoListBody > div.listItem[data-list-item-id='" + updateData.listItemId + "']");
+    let listItemTitle = listItem.querySelector("label.listItemTitle");
     listItemTitle.textContent = updateData.listItemName;
 }
