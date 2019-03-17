@@ -20,7 +20,7 @@ body {
 	margin-right: 1vw;
 }
 
-.listItemEditBtns, .listItemOptionsBtns {
+.listItemEditBtns, .listItemOptionsBtns, .toDoListFooter {
 	cursor: pointer;
 }
 
