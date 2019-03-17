@@ -117,6 +117,7 @@ function makeLists(array) {
         if (currentElm.listItemId != null) {
             listItem = document.createElement("DIV");
             listItem.className = "custom-control custom-checkbox list-group-item listItems list-group-item-action pl-5 listItem";
+            listItem.dataset.listItemId = currentElm.listItemId;
             listItemCheckbox = document.createElement("INPUT");
             listItemCheckbox.type = "checkbox";
             listItemCheckbox.className = "custom-control-input listItemCheckbox";
@@ -138,8 +139,7 @@ function makeLists(array) {
                 listItemId: currentElm.listItemId,
                 listId: currentElm.listId,
                 listItemName: currentElm.listItemName,
-                listItemDuration: currentElm.listItemDuration,
-                listItemStatus: currentElm.listItemStatus
+                listItemDuration: currentElm.listItemDuration
             };
             listItemEditBtnWrap.onclick = function() {
                 getListItem(modalData).then(json => setUpModal(document.getElementById("editModal"), "Edit list item", "updateListItem", json));
