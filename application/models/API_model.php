@@ -38,11 +38,18 @@ class API_model extends CI_Model {
         }
     }
 
-	public function updateList($updateData) {
+	public function updateList($updateData, $listId) {
         $this->load->database();
-        $listId = $updateData["listId"];
-        unset($updateData["listId"]);
-        $query = $this->db->update('lists', $updateData, "listId = " . $listId);
+        $this->db->where('listId', $listId);
+        $query = $this->db->update('lists', $updateData);
+        return $query;
+	}
+
+	public function updateListItem($updateData, $listItemId, $listId) {
+        $this->load->database();
+        $this->db->where('listItemId', $listItemId);
+        $this->db->where('listId', $listId);
+        $query = $this->db->update('lists', $updateData);
         return $query;
 	}
 }
