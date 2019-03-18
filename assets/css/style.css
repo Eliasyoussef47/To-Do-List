@@ -12,7 +12,24 @@ body {
 	background-color: #0079bf;
 	height: 95vh;
 }
-.mainCons {
+
+body::-webkit-scrollbar-track
+{
+	border-radius: 4px;
+	background-color: hsla(202, 100%, 46%, 1);
+}
+
+body::-webkit-scrollbar
+{
+	width: 8px;
+	background-color: #0079bf;
+	height: 13px;
+}
+
+body::-webkit-scrollbar-thumb
+{
+	border-radius: 7px;
+	background-color: hsla(202, 100%, 19%, 1);
 }
 
 .toDoLists {
