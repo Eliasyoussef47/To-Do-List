@@ -166,8 +166,11 @@ function makeLists(array) {
             listFooter = document.createElement("DIV");
             listFooter.className = "list-group-item list-group-item-action list-group-item-primary toDoListFooter";
             listFooter.innerText = "Add a new card";
+            let modalData = {
+                listId: currentElm.listId
+            };
             listFooter.onclick = function() {
-                setUpModal(document.getElementById("editModal"), "Add a new card", "insertListItem", null);
+                setUpModal(document.getElementById("editModal"), "Add a new card", "insertListItem", modalData);
                 $("#editModal").modal("show");
             };
             listItemAddBtns = document.createElement("I");
@@ -176,12 +179,6 @@ function makeLists(array) {
             listConDiv.appendChild(listFooter);
         }
     })
-}
-
-function removeChildren(parentElement) {
-    while (parentElement.firstChild) {
-        parentElement.removeChild(parentElement.firstChild);
-    }
 }
 
 function getFormValues(form) {
