@@ -1,3 +1,49 @@
+function insertList(insertData) {
+    startMediumLoading();
+    let insertDataString = JSON.stringify(insertData);
+    let searchParams = new URLSearchParams();
+    searchParams.append('insertData', insertDataString);
+    const myInit = {
+        method: 'POST',
+        credentials: 'include',
+        body: searchParams
+    };
+    return fetch("http://localhost/To-Do-List/API/insertList", myInit)
+        .then(function(response) {
+            if (response.status === 200) {
+                return response.json();
+            }
+        }).then(function(json) {
+            stopMediumLoading();
+            return json;
+        }).catch(function (error) {
+            console.log(error.body);
+        });
+}
+
+function insertListItem(insertData) {
+    startMediumLoading();
+    let insertDataString = JSON.stringify(insertData);
+    let searchParams = new URLSearchParams();
+    searchParams.append('insertData', insertDataString);
+    const myInit = {
+        method: 'POST',
+        credentials: 'include',
+        body: searchParams
+    };
+    return fetch("http://localhost/To-Do-List/API/insertListItem", myInit)
+        .then(function(response) {
+            if (response.status === 200) {
+                return response.json();
+            }
+        }).then(function(json) {
+            stopMediumLoading();
+            return json;
+        }).catch(function (error) {
+            console.log(error.body);
+        });
+}
+
 function getAllLists() {
     startFullScreenLoading();
     const myInit = {
