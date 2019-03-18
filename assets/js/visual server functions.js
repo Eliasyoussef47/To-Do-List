@@ -1,3 +1,14 @@
+/*globals toDoListsMainCon*/
+function insertListVisual(insertData) {
+    toDoListsMainCon.appendChild(makeList(insertData));
+}
+
+function insertListItemVisual(insertData) {
+    let list = document.querySelector("[data-list-id='" + insertData.listId + "']");
+    let listBody = list.querySelector("div.toDoListBody");
+    listBody.appendChild(makeListItem(insertData));
+}
+
 function updateListVisual(updateData) {
     let list = document.querySelector("[data-list-id='" + updateData.listId + "']");
     let listHeaderTitle = list.querySelector("div.toDoListHeader > span.toDoListHeaderTitle");
