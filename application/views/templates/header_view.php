@@ -8,6 +8,7 @@
 	<script defer src="https://use.fontawesome.com/releases/v5.6.1/js/all.js" integrity="sha384-R5JkiUweZpJjELPWqttAYmYM1P3SNEJRM6ecTQF05pFFtxmCO+Y1CiUhvuDzgSVZ" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/tools.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/visual functions.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/server functions.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/visual server functions.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/modal functions.js"></script>
