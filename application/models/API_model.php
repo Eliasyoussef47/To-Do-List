@@ -1,5 +1,17 @@
 <?php
 class API_model extends CI_Model {
+    public function insertList($insertData) {
+        $this->load->database();
+        $this->db->insert('lists', $insertData);
+        return $this->db->insert_id();
+    }
+
+    public function insertListItem($insertData) {
+        $this->load->database();
+        $this->db->insert('listsItems', $insertData);
+        return $this->db->insert_id();
+    }
+
 	public function getAllLists() {
 		$this->load->database();
         $this->db->select('*');
