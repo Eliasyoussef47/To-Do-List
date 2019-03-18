@@ -10,7 +10,7 @@ body {
 	font-family: Roboto-Regular, sans-serif;
 	transition: all 0.5s;
 	background-color: #0079bf;
-	height: 100vh;
+	height: 95vh;
 }
 .mainCons {
 }
@@ -52,7 +52,7 @@ body {
 }
 
 #rightBottomLoadingCircle {
-	position: absolute;
+	position: fixed;
 	right: 10px;
 	bottom: 10px;
 	width: 100px;
