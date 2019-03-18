@@ -8,6 +8,36 @@ class API extends CI_Controller {
         echo '<h1>400 Bad Request</h1>';
     }
 
+    public function insertList()
+    {
+        if ($this->input->post('insertData') === null) {
+            http_response_code(400);
+            echo '<h1>400 Bad Request</h1>';
+        } else {
+            $insertData = json_decode($this->input->post('insertData'), true);
+            $this->load->model('API_model');
+            $query = $this->API_model->insertList($insertData);
+            $json = array("listId" => $query);
+            echo(json_encode($json));
+        }
+
+    }
+
+    public function insertListItem()
+    {
+        if ($this->input->post('insertData') === null) {
+            http_response_code(400);
+            echo '<h1>400 Bad Request</h1>';
+        } else {
+            $insertData = json_decode($this->input->post('insertData'), true);
+            $this->load->model('API_model');
+            $query = $this->API_model->insertListItem($insertData);
+            $json = array("listItemId" => $query);
+            echo(json_encode($json));
+        }
+
+    }
+
     public function getAllLists()
     {
         $this->load->model('API_model');
