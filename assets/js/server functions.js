@@ -174,6 +174,27 @@ function updateListItemStatus(updateData) {
         });
 }
 
+function deleteList(deleteData) {
+    startMediumLoading();
+    let deleteDataString = JSON.stringify(deleteData);
+    let searchParams = new URLSearchParams();
+    searchParams.append('deleteData', deleteDataString);
+    const myInit = {
+        method: 'POST',
+        credentials: 'include',
+        body: searchParams
+    };
+    return fetch("http://localhost/To-Do-List/API/deleteList", myInit)
+        .then(function(response) {
+            stopMediumLoading();
+            return response.text();
+        }).then(function(responseText) {
+            console.log(responseText);
+        }).catch(function (error) {
+            console.log(error.body);
+        });
+}
+
 function deleteListItem(deleteData) {
     startMediumLoading();
     let deleteDataString = JSON.stringify(deleteData);
