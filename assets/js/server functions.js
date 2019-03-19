@@ -184,7 +184,7 @@ function deleteListItem(deleteData) {
         credentials: 'include',
         body: searchParams
     };
-    return fetch("http://localhost/To-Do-List/API/updateListItemStatus", myInit)
+    return fetch("http://localhost/To-Do-List/API/deleteListItem", myInit)
         .then(function(response) {
             stopMediumLoading();
             return response.text();
