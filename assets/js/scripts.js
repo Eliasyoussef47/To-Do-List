@@ -3,6 +3,6 @@ window.onload = function() {
 };
 
 newListBtn.onclick = function () {
-    setUpModal(document.getElementById("editModal"), "Add a new list", "deleteListItem", null);
+    setUpModal(document.getElementById("editModal"), "Add a new list", "insertList", null);
     $("#editModal").modal("show");
 };
