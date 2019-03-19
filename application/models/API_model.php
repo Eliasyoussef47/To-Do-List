@@ -14,7 +14,12 @@ class API_model extends CI_Model {
 
 	public function getAllLists() {
 		$this->load->database();
-        $this->db->select('*');
+        $this->db->select('`lists`.`listId`');
+        $this->db->select('`lists`.`listName`');
+        $this->db->select('`listsItems`.`listItemId`');
+        $this->db->select('`listsItems`.`listItemName`');
+        $this->db->select('`listsItems`.`listItemDuration`');
+        $this->db->select('`listsItems`.`listItemStatus`');
         $this->db->from('lists');
         $this->db->join('listsItems', 'lists.listId = listsItems.listId', 'left');
         $query = $this->db->get();
