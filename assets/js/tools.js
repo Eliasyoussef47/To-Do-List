@@ -160,16 +160,6 @@ function makeLists(array) {
             listItemEditBtnWrap.appendChild(listItemEditBtn);
             listItemOptionsBtnWrap = document.createElement("DIV");
             listItemOptionsBtnWrap.className = "btn-group dropleft float-right ml-2";
-            modalData = {
-                listItemId: currentElm.listItemId,
-                listId: currentElm.listId,
-                listItemName: currentElm.listItemName,
-                listItemDuration: currentElm.listItemDuration
-            };
-            listItemOptionsBtnWrap.onclick = function() {
-                setUpModal(document.getElementById("editModal"), "Delete list item?", "deleteListItem", modalData);
-                $("#editModal").modal("show");
-            };
             listItemOptionsBtn = document.createElement("I");
             listItemOptionsBtn.className = "fas fa-ellipsis-v text-primary listItemOptionsBtns";
             listItemOptionsBtn.dataset.toggle = "dropdown";
@@ -180,6 +170,16 @@ function makeLists(array) {
             listItemOptionsBtnDropdownMenuOption.className = "dropdown-item";
             listItemOptionsBtnDropdownMenuOption.href = "#";
             listItemOptionsBtnDropdownMenuOption.innerText = "Delete";
+            modalData = {
+                listItemId: currentElm.listItemId,
+                listId: currentElm.listId,
+                listItemName: currentElm.listItemName,
+                listItemDuration: currentElm.listItemDuration
+            };
+            listItemOptionsBtnDropdownMenuOption.onclick = function() {
+                setUpModal(document.getElementById("editModal"), "Delete list item?", "deleteListItem", modalData);
+                $("#editModal").modal("show");
+            };
             listItemOptionsBtnDropdownMenu.appendChild(listItemOptionsBtnDropdownMenuOption);
             listItemOptionsBtnWrap.appendChild(listItemOptionsBtnDropdownMenu);
             listItem.appendChild(listItemOptionsBtnWrap);
