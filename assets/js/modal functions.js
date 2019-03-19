@@ -4,6 +4,7 @@ function setUpModal(modal, title, mode, data = null) {
         "insertListItem": null,
         "updateList": getList,
         "updateListItem": getListItem,
+        "deleteList": getList,
         "deleteListItem": getListItem
     };
     let relevantServerFunction = {
@@ -11,6 +12,7 @@ function setUpModal(modal, title, mode, data = null) {
         "insertListItem": insertListItem,
         "updateList": updateList,
         "updateListItem": updateListItem,
+        "deleteList": deleteList,
         "deleteListItem": deleteListItem
     };
     let relevantVisualServerFunction = {
@@ -18,6 +20,7 @@ function setUpModal(modal, title, mode, data = null) {
         "insertListItem": insertListItemVisual,
         "updateList": updateListVisual,
         "updateListItem": updateListItemVisual,
+        "deleteList": deleteListVisual,
         "deleteListItem": deleteListItemVisual
     };
     let modalBody = modal.querySelector("div.modal-body");
@@ -34,7 +37,7 @@ function setUpModal(modal, title, mode, data = null) {
     }
     modalForm.onsubmit = function () {
         event.preventDefault();
-        if (mode === "updateList" || mode === "updateListItem" || mode === "deleteListItem") {
+        if (mode === "updateList" || mode === "updateListItem" || mode === "deleteListItem" || mode === "deleteList") {
             relevantServerFunction[mode](getFormValues(modalForm));
             relevantVisualServerFunction[mode](getFormValues(modalForm));
         } else if (mode === "insertListItem" || mode === "insertList") {
@@ -50,7 +53,7 @@ function getModalForm(mode, data) {
     if (data === null) {
         data = {};
     }
-    let modes = ["insertList", "insertListItem", "updateList", "updateListItem", "deleteListItem"];
+    let modes = ["insertList", "insertListItem", "updateList", "updateListItem", "deleteList", "deleteListItem"];
     if (!modes.includes(mode)) {
         return false;
     }
@@ -58,14 +61,15 @@ function getModalForm(mode, data) {
     let formGroupDiv;
     let formGroupDivLabel;
     let formGroupDivInput;
-    if (mode === "updateList" || mode === "insertList") {
+    if (mode === "updateList" || mode === "insertList" || mode === "deleteList") {
         wrapperDiv = document.createElement("DIV");
-        if (mode === "updateList") {
+        if (mode === "updateList" || mode === "deleteList") {
             formGroupDivInput = document.createElement("INPUT");
             formGroupDivInput.type = "text";
             formGroupDivInput.name = "listId";
             formGroupDivInput.hidden = true;
             formGroupDivInput.value = data.listId;
+            formGroupDivInput.setAttribute("readonly", "");
             wrapperDiv.appendChild(formGroupDivInput);
         }
         formGroupDiv = document.createElement("DIV");
@@ -79,7 +83,12 @@ function getModalForm(mode, data) {
         formGroupDivInput.id = "listNameInput";
         formGroupDivInput.className = "form-control";
         formGroupDivInput.name = "listName";
-        formGroupDivInput.value = data.listName || null;
+        if (mode === "updateList" || mode === "deleteList") {
+            formGroupDivInput.value = data.listName;
+            if (mode === "deleteListItem") {
+                formGroupDivInput.setAttribute("readonly", "");
+            }
+        }
         formGroupDivInput.placeholder = "List name";
         formGroupDiv.appendChild(formGroupDivInput);
         wrapperDiv.appendChild(formGroupDiv);
@@ -93,6 +102,7 @@ function getModalForm(mode, data) {
             formGroupDivInput.hidden = true;
             formGroupDivInput.readonly = true;
             formGroupDivInput.value = data.listItemId;
+            formGroupDivInput.setAttribute("readonly", "");
             wrapperDiv.appendChild(formGroupDivInput);
         }
         formGroupDivInput = document.createElement("INPUT");
@@ -101,6 +111,7 @@ function getModalForm(mode, data) {
         formGroupDivInput.hidden = true;
         formGroupDivInput.readonly = true;
         formGroupDivInput.value = data.listId;
+        formGroupDivInput.setAttribute("readonly", "");
         wrapperDiv.appendChild(formGroupDivInput);
         formGroupDiv = document.createElement("DIV");
         formGroupDiv.className = "form-group";
