@@ -21,3 +21,9 @@ function updateListItemVisual(updateData) {
     let listItemTitle = listItem.querySelector("label.listItemTitle");
     listItemTitle.textContent = updateData.listItemName;
 }
+
+function deleteListItemVisual(deleteData) {
+    let list = document.querySelector("[data-list-id='" + deleteData.listId + "']");
+    //verwijder het element zonder te declaren in een variable zodat garbage collector het element later verwijdert
+    list.querySelector("div.toDoListBody > div.listItem[data-list-item-id='" + deleteData.listItemId + "']").remove();
+}
