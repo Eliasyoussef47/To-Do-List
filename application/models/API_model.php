@@ -69,4 +69,11 @@ class API_model extends CI_Model {
         $query = $this->db->update('listsItems', $updateData);
         return $query;
 	}
+
+	public function deleteListItem($deleteData, $listItemId) {
+        $this->load->database();
+        $this->db->where('listItemId', $listItemId);
+        $query = $this->db->delete('listsItems');
+        return $query;
+	}
 }
