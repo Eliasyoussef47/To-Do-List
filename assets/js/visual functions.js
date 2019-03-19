@@ -3,7 +3,11 @@ function makeListItem(dataObj) {// dataObj moet de volgende bevatten: listItemId
     listItemCheckbox,
     listItemCheckboxLabel,
     listItemEditBtnWrap,
-    listItemEditBtn;
+    listItemEditBtn,
+    listItemOptionsBtnWrap,
+    listItemOptionsBtn,
+    listItemOptionsBtnDropdownMenu,
+    listItemOptionsBtnDropdownMenuOption;
     listItem = document.createElement("DIV");
     listItem.className = "custom-control custom-checkbox list-group-item listItems list-group-item-action pl-5 listItem";
     listItem.dataset.listItemId = dataObj.listItemId;
@@ -44,23 +48,48 @@ function makeListItem(dataObj) {// dataObj moet de volgende bevatten: listItemId
     listItemEditBtn = document.createElement("I");
     listItemEditBtn.className = "fas fa-edit text-primary listItemEditBtns";
     listItemEditBtnWrap.appendChild(listItemEditBtn);
+    listItemOptionsBtnWrap = document.createElement("DIV");
+    listItemOptionsBtnWrap.className = "btn-group dropleft float-right ml-2";
+    modalData = {
+        listItemId: dataObj.listItemId,
+        listId: dataObj.listId,
+        listItemName: dataObj.listItemName,
+        listItemDuration: dataObj.listItemDuration
+    };
+    listItemOptionsBtnWrap.onclick = function() {
+        setUpModal(document.getElementById("editModal"), "Delete list item?", "deleteListItem", modalData);
+        $("#editModal").modal("show");
+    };
+    listItemOptionsBtn = document.createElement("I");
+    listItemOptionsBtn.className = "fas fa-ellipsis-v text-primary listItemOptionsBtns";
+    listItemOptionsBtn.dataset.toggle = "dropdown";
+    listItemOptionsBtnWrap.appendChild(listItemOptionsBtn);
+    listItemOptionsBtnDropdownMenu = document.createElement("DIV");
+    listItemOptionsBtnDropdownMenu.className = "dropdown-menu";
+    listItemOptionsBtnDropdownMenuOption = document.createElement("A");
+    listItemOptionsBtnDropdownMenuOption.className = "dropdown-item";
+    listItemOptionsBtnDropdownMenuOption.href = "#";
+    listItemOptionsBtnDropdownMenuOption.innerText = "Delete";
+    listItemOptionsBtnDropdownMenu.appendChild(listItemOptionsBtnDropdownMenuOption);
+    listItemOptionsBtnWrap.appendChild(listItemOptionsBtnDropdownMenu);
+    listItem.appendChild(listItemOptionsBtnWrap);
     listItem.appendChild(listItemEditBtnWrap);
     return listItem;
 }
 
 function makeList(dataObj) {// dataObj moet de volgende bevatten: listId en listName
-    let listConDiv;
-    let listHeader;
-    let listHeaderTitle;
-    let listBody;
-    let listItemEditBtnWrap;
-    let listItemEditBtn;
-    let listItemOptionsBtnWrap;
-    let listItemOptionsBtn;
-    let listItemOptionsBtnDropdownMenu;
-    let listItemOptionsBtnDropdownMenuOption;
-    let listFooter;
-    let listItemAddBtns;
+    let listConDiv,
+    listHeader,
+    listHeaderTitle,
+    listBody,
+    listItemEditBtnWrap,
+    listItemEditBtn,
+    listItemOptionsBtnWrap,
+    listItemOptionsBtn,
+    listItemOptionsBtnDropdownMenu,
+    listItemOptionsBtnDropdownMenuOption,
+    listFooter,
+    listItemAddBtns;
     listConDiv = document.createElement("DIV");
     listConDiv.className = "list-group toDoLists";
     listConDiv.dataset.listId = dataObj.listId;
