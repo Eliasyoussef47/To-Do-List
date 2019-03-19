@@ -3,19 +3,22 @@ function setUpModal(modal, title, mode, data = null) {
         "insertList": null,
         "insertListItem": null,
         "updateList": getList,
-        "updateListItem": getListItem
+        "updateListItem": getListItem,
+        "deleteListItem": getListItem
     };
     let relevantServerFunction = {
         "insertList": insertList,
         "insertListItem": insertListItem,
         "updateList": updateList,
-        "updateListItem": updateListItem
+        "updateListItem": updateListItem,
+        "deleteListItem": deleteListItem
     };
     let relevantVisualServerFunction = {
         "insertList": insertListVisual,
         "insertListItem": insertListItemVisual,
         "updateList": updateListVisual,
-        "updateListItem": updateListItemVisual
+        "updateListItem": updateListItemVisual,
+        "deleteListItem": deleteListItemVisual
     };
     let modalBody = modal.querySelector("div.modal-body");
     let modalForm = modal.querySelector("form.modalForm");
@@ -47,7 +50,7 @@ function getModalForm(mode, data) {
     if (data === null) {
         data = {};
     }
-    let modes = ["insertList", "insertListItem", "updateList", "updateListItem", "newList"];
+    let modes = ["insertList", "insertListItem", "updateList", "updateListItem", "deleteListItem"];
     if (!modes.includes(mode)) {
         return false;
     }
@@ -81,13 +84,14 @@ function getModalForm(mode, data) {
         formGroupDiv.appendChild(formGroupDivInput);
         wrapperDiv.appendChild(formGroupDiv);
         return wrapperDiv;
-    } else if (mode === "updateListItem" || mode === "insertListItem") {
+    } else if (mode === "updateListItem" || mode === "insertListItem" || mode === "deleteListItem") {
         wrapperDiv = document.createElement("DIV");
-        if (mode === "updateListItem") {
+        if (mode === "updateListItem" || mode === "deleteListItem") {
             formGroupDivInput = document.createElement("INPUT");
             formGroupDivInput.type = "text";
             formGroupDivInput.name = "listItemId";
             formGroupDivInput.hidden = true;
+            formGroupDivInput.readonly = true;
             formGroupDivInput.value = data.listItemId;
             wrapperDiv.appendChild(formGroupDivInput);
         }
@@ -95,6 +99,7 @@ function getModalForm(mode, data) {
         formGroupDivInput.type = "text";
         formGroupDivInput.name = "listId";
         formGroupDivInput.hidden = true;
+        formGroupDivInput.readonly = true;
         formGroupDivInput.value = data.listId;
         wrapperDiv.appendChild(formGroupDivInput);
         formGroupDiv = document.createElement("DIV");
@@ -111,6 +116,8 @@ function getModalForm(mode, data) {
         formGroupDivInput.name = "listItemName";
         if (mode === "updateListItem") {
             formGroupDivInput.value = data.listItemName;
+        } else if (mode === "deleteListItem") {
+            formGroupDivInput.readonly = true;
         }
         formGroupDivInput.placeholder = "List item name";
         formGroupDiv.appendChild(formGroupDivInput);
@@ -128,6 +135,8 @@ function getModalForm(mode, data) {
         formGroupDivInput.name = "listItemDuration";
         if (mode === "updateListItem") {
             formGroupDivInput.value = data.listItemDuration;
+        } else if (mode === "deleteListItem") {
+            formGroupDivInput.readonly = true;
         }
         formGroupDivInput.placeholder = "List item duration";
         formGroupDiv.appendChild(formGroupDivInput);
