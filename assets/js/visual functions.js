@@ -124,6 +124,14 @@ function makeList(dataObj) {// dataObj moet de volgende bevatten: listId en list
     listItemOptionsBtnDropdownMenuOption.className = "dropdown-item";
     listItemOptionsBtnDropdownMenuOption.href = "#";
     listItemOptionsBtnDropdownMenuOption.innerText = "Delete";
+    modalData = {
+        listId: dataObj.listId,
+        listName: dataObj.listName
+    };
+    listItemOptionsBtnDropdownMenuOption.onclick = function() {
+        setUpModal(document.getElementById("editModal"), "Delete list?", "deleteList", modalData);
+        $("#editModal").modal("show");
+    };
     listItemOptionsBtnDropdownMenu.appendChild(listItemOptionsBtnDropdownMenuOption);
     listItemOptionsBtnWrap.appendChild(listItemOptionsBtnDropdownMenu);
     listHeader.appendChild(listItemOptionsBtnWrap);
