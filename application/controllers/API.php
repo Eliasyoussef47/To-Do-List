@@ -120,4 +120,19 @@ class API extends CI_Controller {
             echo $query;
         }
     }
+
+    public function deleteListItem()
+    {
+        if ($this->input->post('deleteData') === null) {
+            http_response_code(400);
+            echo '<h1>400 Bad Request</h1>';
+        } else {
+            $deleteData = json_decode($this->input->post('deleteData'), true);
+            $this->load->model('API_model');
+            $listItemId = $deleteData["listItemId"];
+            unset($deleteData["listItemId"]);
+            $query = $this->API_model->deleteListItem($deleteData, $listItemId);
+            echo $query;
+        }
+    }
 }
