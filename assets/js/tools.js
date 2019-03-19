@@ -158,6 +158,31 @@ function makeLists(array) {
             listItemEditBtn = document.createElement("I");
             listItemEditBtn.className = "fas fa-edit text-primary listItemEditBtns";
             listItemEditBtnWrap.appendChild(listItemEditBtn);
+            listItemOptionsBtnWrap = document.createElement("DIV");
+            listItemOptionsBtnWrap.className = "btn-group dropleft float-right ml-2";
+            modalData = {
+                listItemId: currentElm.listItemId,
+                listId: currentElm.listId,
+                listItemName: currentElm.listItemName,
+                listItemDuration: currentElm.listItemDuration
+            };
+            listItemOptionsBtnWrap.onclick = function() {
+                setUpModal(document.getElementById("editModal"), "Delete list item?", "deleteListItem", modalData);
+                $("#editModal").modal("show");
+            };
+            listItemOptionsBtn = document.createElement("I");
+            listItemOptionsBtn.className = "fas fa-ellipsis-v text-primary listItemOptionsBtns";
+            listItemOptionsBtn.dataset.toggle = "dropdown";
+            listItemOptionsBtnWrap.appendChild(listItemOptionsBtn);
+            listItemOptionsBtnDropdownMenu = document.createElement("DIV");
+            listItemOptionsBtnDropdownMenu.className = "dropdown-menu";
+            listItemOptionsBtnDropdownMenuOption = document.createElement("A");
+            listItemOptionsBtnDropdownMenuOption.className = "dropdown-item";
+            listItemOptionsBtnDropdownMenuOption.href = "#";
+            listItemOptionsBtnDropdownMenuOption.innerText = "Delete";
+            listItemOptionsBtnDropdownMenu.appendChild(listItemOptionsBtnDropdownMenuOption);
+            listItemOptionsBtnWrap.appendChild(listItemOptionsBtnDropdownMenu);
+            listItem.appendChild(listItemOptionsBtnWrap);
             listItem.appendChild(listItemEditBtnWrap);
             listBody.appendChild(listItem);
         }
