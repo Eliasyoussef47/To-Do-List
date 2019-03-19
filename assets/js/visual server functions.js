@@ -22,6 +22,11 @@ function updateListItemVisual(updateData) {
     listItemTitle.textContent = updateData.listItemName;
 }
 
+function deleteListVisual(deleteData) {
+    //verwijder het element zonder te declaren in een variable zodat garbage collector het element later verwijdert
+    document.querySelector("[data-list-id='" + deleteData.listId + "']").remove();
+}
+
 function deleteListItemVisual(deleteData) {
     let list = document.querySelector("[data-list-id='" + deleteData.listId + "']");
     //verwijder het element zonder te declaren in een variable zodat garbage collector het element later verwijdert
