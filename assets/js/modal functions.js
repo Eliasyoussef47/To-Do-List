@@ -34,12 +34,12 @@ function setUpModal(modal, title, mode, data = null) {
     }
     modalForm.onsubmit = function () {
         event.preventDefault();
-        if (mode === "updateList" || mode === "updateListItem") {
+        if (mode === "updateList" || mode === "updateListItem" || mode === "deleteListItem") {
             relevantServerFunction[mode](getFormValues(modalForm));
             relevantVisualServerFunction[mode](getFormValues(modalForm));
         } else if (mode === "insertListItem" || mode === "insertList") {
             relevantServerFunction[mode](getFormValues(modalForm)).then(response => {
-                relevantVisualServerFunction[mode]({...getFormValues(modalForm), ...response})
+                relevantVisualServerFunction[mode]({...getFormValues(modalForm), ...response})//versprijd de properties van de objects zodat ik ze kan samenvoegen
             });
         }
         $("#" + modal.id).modal("hide");
@@ -114,10 +114,11 @@ function getModalForm(mode, data) {
         formGroupDivInput.id = "listItemNameInput";
         formGroupDivInput.className = "form-control";
         formGroupDivInput.name = "listItemName";
-        if (mode === "updateListItem") {
+        if (mode === "updateListItem" || mode === "deleteListItem") {
             formGroupDivInput.value = data.listItemName;
-        } else if (mode === "deleteListItem") {
-            formGroupDivInput.readonly = true;
+            if (mode === "deleteListItem") {
+                formGroupDivInput.setAttribute("readonly", "");
+            }
         }
         formGroupDivInput.placeholder = "List item name";
         formGroupDiv.appendChild(formGroupDivInput);
@@ -133,10 +134,11 @@ function getModalForm(mode, data) {
         formGroupDivInput.id = "listItemDurationInput";
         formGroupDivInput.className = "form-control";
         formGroupDivInput.name = "listItemDuration";
-        if (mode === "updateListItem") {
+        if (mode === "updateListItem" || mode === "deleteListItem") {
             formGroupDivInput.value = data.listItemDuration;
-        } else if (mode === "deleteListItem") {
-            formGroupDivInput.readonly = true;
+            if (mode === "deleteListItem") {
+                formGroupDivInput.setAttribute("readonly", "");
+            }
         }
         formGroupDivInput.placeholder = "List item duration";
         formGroupDiv.appendChild(formGroupDivInput);
