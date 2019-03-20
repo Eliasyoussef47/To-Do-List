@@ -85,7 +85,7 @@ function getModalForm(mode, data) {
         formGroupDivInput.name = "listName";
         if (mode === "updateList" || mode === "deleteList") {
             formGroupDivInput.value = data.listName;
-            if (mode === "deleteListItem") {
+            if (mode === "deleteList") {
                 formGroupDivInput.setAttribute("readonly", "");
             }
         }
