@@ -9,8 +9,11 @@ function makeListItem(dataObj) {// dataObj moet de volgende bevatten: listItemId
     listItemOptionsBtnDropdownMenu,
     listItemOptionsBtnDropdownMenuOption;
     listItem = document.createElement("DIV");
-    listItem.className = "custom-control custom-checkbox list-group-item listItems list-group-item-action pl-5 listItem";
+    listItem.className = "custom-control custom-checkbox list-group-item list-group-item-action pl-5 listItem";
     listItem.dataset.listItemId = dataObj.listItemId;
+    listItem.dataset.listId = dataObj.listId;
+    listItem.dataset.listItemDuration = dataObj.listItemDuration;
+    listItem.dataset.listItemStatus = "0";//standard value
     listItemCheckbox = document.createElement("INPUT");
     listItemCheckbox.type = "checkbox";
     listItemCheckbox.className = "custom-control-input listItemCheckbox";
@@ -26,6 +29,7 @@ function makeListItem(dataObj) {// dataObj moet de volgende bevatten: listItemId
     listItemCheckbox.onchange = function() {
         updateData.listItemStatus = this.checked;
         updateListItemStatus(updateData);
+        updateListItemStatusVisual(updateData);
     };
     listItem.appendChild(listItemCheckbox);
     listItemCheckboxLabel = document.createElement("LABEL");
@@ -135,7 +139,41 @@ function makeList(dataObj) {// dataObj moet de volgende bevatten: listId en list
     listItemOptionsBtnDropdownMenu.appendChild(listItemOptionsBtnDropdownMenuOption);
     listItemOptionsBtnWrap.appendChild(listItemOptionsBtnDropdownMenu);
     listHeader.appendChild(listItemOptionsBtnWrap);
+
+    listItemOptionsBtnWrap = document.createElement("DIV");
+    listItemOptionsBtnWrap.className = "btn-group dropleft float-right ml-2";
+    listItemOptionsBtn = document.createElement("I");
+    listItemOptionsBtn.className = "fas fa-sort-amount-down text-light listItemOptionsBtns";
+    listItemOptionsBtn.dataset.toggle = "dropdown";
+    listItemOptionsBtnWrap.appendChild(listItemOptionsBtn);
+    listItemOptionsBtnDropdownMenu = document.createElement("DIV");
+    listItemOptionsBtnDropdownMenu.className = "dropdown-menu";
+
+    listItemOptionsBtnDropdownMenuOption = document.createElement("A");
+    listItemOptionsBtnDropdownMenuOption.className = "dropdown-item";
+    listItemOptionsBtnDropdownMenuOption.href = "#";
+    listItemOptionsBtnDropdownMenuOption.innerText = "Sort by time";
+    listItemOptionsBtnDropdownMenuOption.onclick = function() {
+        let list = document.querySelector("[data-list-id='" + dataObj.listId + "']");
+        sortList(list, "listItemDuration");
+    };
+    listItemOptionsBtnDropdownMenu.appendChild(listItemOptionsBtnDropdownMenuOption);
+
+    listItemOptionsBtnDropdownMenuOption = document.createElement("A");
+    listItemOptionsBtnDropdownMenuOption.className = "dropdown-item";
+    listItemOptionsBtnDropdownMenuOption.href = "#";
+    listItemOptionsBtnDropdownMenuOption.innerText = "Sort by status";
+    listItemOptionsBtnDropdownMenuOption.onclick = function() {
+        let list = document.querySelector("[data-list-id='" + dataObj.listId + "']");
+        sortList(list, "listItemStatus");
+    };
+    listItemOptionsBtnDropdownMenu.appendChild(listItemOptionsBtnDropdownMenuOption);
+
+    listItemOptionsBtnWrap.appendChild(listItemOptionsBtnDropdownMenu);
     listHeader.appendChild(listItemEditBtnWrap);
+    listHeader.appendChild(listItemOptionsBtnWrap);
+
+
     listConDiv.appendChild(listHeader);
     // currentListId = dataObj.listId;
     listBody = document.createElement("DIV");
