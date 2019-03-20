@@ -50,23 +50,23 @@ function stopModalLoading() {
 }
 
 function makeLists(array) {
-    let currentListId = "0";
-    let listConDiv;
-    let listHeader;
-    let listHeaderTitle;
-    let listBody;
-    let listItem;
-    let listItemCheckbox;
-    let listItemCheckboxLabel;
-    let listItemEditBtnWrap;
-    let listItemEditBtn;
-    let listItemOptionsBtnWrap;
-    let listItemOptionsBtn;
-    let listItemOptionsBtnDropdownMenu;
-    let listItemOptionsBtnDropdownMenuOption;
-    let listFooter;
-    let listItemAddBtns;
-    let nextArrayElement;
+    let currentListId = "0",
+    listConDiv,
+    listHeader,
+    listHeaderTitle,
+    listBody,
+    listItem,
+    listItemCheckbox,
+    listItemCheckboxLabel,
+    listItemEditBtnWrap,
+    listItemEditBtn,
+    listItemOptionsBtnWrap,
+    listItemOptionsBtn,
+    listItemOptionsBtnDropdownMenu,
+    listItemOptionsBtnDropdownMenuOption,
+    listFooter,
+    listItemAddBtns,
+    nextArrayElement;
 
     array.forEach(function(currentElm, index, array) {
         nextArrayElement = array[(index + 1)];
@@ -116,7 +116,35 @@ function makeLists(array) {
             listItemOptionsBtnDropdownMenu.appendChild(listItemOptionsBtnDropdownMenuOption);
             listItemOptionsBtnWrap.appendChild(listItemOptionsBtnDropdownMenu);
             listHeader.appendChild(listItemOptionsBtnWrap);
+            listItemOptionsBtnWrap = document.createElement("DIV");
+            listItemOptionsBtnWrap.className = "btn-group dropleft float-right ml-2";
+            listItemOptionsBtn = document.createElement("I");
+            listItemOptionsBtn.className = "fas fa-sort-amount-down text-light listItemOptionsBtns";
+            listItemOptionsBtn.dataset.toggle = "dropdown";
+            listItemOptionsBtnWrap.appendChild(listItemOptionsBtn);
+            listItemOptionsBtnDropdownMenu = document.createElement("DIV");
+            listItemOptionsBtnDropdownMenu.className = "dropdown-menu";
+            listItemOptionsBtnDropdownMenuOption = document.createElement("A");
+            listItemOptionsBtnDropdownMenuOption.className = "dropdown-item";
+            listItemOptionsBtnDropdownMenuOption.href = "#";
+            listItemOptionsBtnDropdownMenuOption.innerText = "Sort by time";
+            listItemOptionsBtnDropdownMenuOption.onclick = function() {
+                let list = document.querySelector("[data-list-id='" + currentElm.listId + "']");
+                sortList(list, "listItemDuration");
+            };
+            listItemOptionsBtnDropdownMenu.appendChild(listItemOptionsBtnDropdownMenuOption);
+            listItemOptionsBtnDropdownMenuOption = document.createElement("A");
+            listItemOptionsBtnDropdownMenuOption.className = "dropdown-item";
+            listItemOptionsBtnDropdownMenuOption.href = "#";
+            listItemOptionsBtnDropdownMenuOption.innerText = "Sort by status";
+            listItemOptionsBtnDropdownMenuOption.onclick = function() {
+                let list = document.querySelector("[data-list-id='" + currentElm.listId + "']");
+                sortList(list, "listItemStatus");
+            };
+            listItemOptionsBtnDropdownMenu.appendChild(listItemOptionsBtnDropdownMenuOption);
+            listItemOptionsBtnWrap.appendChild(listItemOptionsBtnDropdownMenu);
             listHeader.appendChild(listItemEditBtnWrap);
+            listHeader.appendChild(listItemOptionsBtnWrap);
             listConDiv.appendChild(listHeader);
             toDoListsMainCon.appendChild(listConDiv);
             currentListId = currentElm.listId;
@@ -125,8 +153,11 @@ function makeLists(array) {
         }
         if (currentElm.listItemId != null) {
             listItem = document.createElement("DIV");
-            listItem.className = "custom-control custom-checkbox list-group-item listItems list-group-item-action pl-5 listItem";
+            listItem.className = "custom-control custom-checkbox list-group-item list-group-item-action pl-5 listItem";
             listItem.dataset.listItemId = currentElm.listItemId;
+            listItem.dataset.listId = currentElm.listId;
+            listItem.dataset.listItemDuration = currentElm.listItemDuration;
+            listItem.dataset.listItemStatus = currentElm.listItemStatus;
             listItemCheckbox = document.createElement("INPUT");
             listItemCheckbox.type = "checkbox";
             listItemCheckbox.className = "custom-control-input listItemCheckbox";
@@ -144,6 +175,7 @@ function makeLists(array) {
             listItemCheckbox.onchange = function() {
                 updateData.listItemStatus = this.checked;
                 updateListItemStatus(updateData);
+                updateListItemStatusVisual(updateData);
             };
             listItem.appendChild(listItemCheckbox);
             listItemCheckboxLabel = document.createElement("LABEL");
@@ -220,4 +252,59 @@ function getFormValues(form) {
         values[element.name] = element.value;
     });
     return values;
+}
+
+function sortList(list, factor) {
+    let listBody, listItems, dir, switching, i, x, y, shouldSwitch, switchCount = 0;
+    listBody = list.querySelector(".toDoListBody");
+    switching = true;
+    // Set the sorting direction to ascending:
+    dir = "asc";
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+        // Start by saying: no switching is done:
+        switching = false;
+        listItems = listBody.querySelectorAll(".listItem");
+        /* Loop through all table rows (except the
+        first, which contains table headers): */
+        for (i = 0; i < (listItems.length - 1); i++) {
+            // Start by saying there should be no switching:
+            shouldSwitch = false;
+            /* Get the two elements you want to compare,
+            one from current row and one from the next: */
+            x = listItems[i].dataset[factor];
+            y = listItems[i + 1].dataset[factor];
+            /* Check if the two rows should switch place,
+            based on the direction, asc or desc: */
+            if (dir === "asc") {
+                if (Number(x) > Number(y)) {
+                    // If so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+            } else if (dir === "desc") {
+                if (Number(x) < Number(y)) {
+                    // If so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+        if (shouldSwitch) {
+            /* If a switch has been marked, make the switch
+            and mark that a switch has been done: */
+            listItems[i].parentNode.insertBefore(listItems[i + 1], listItems[i]);
+            switching = true;
+            // Each time a switch is done, increase this count by 1:
+            switchCount ++;
+        } else {
+            /* If no switching has been done AND the direction is "asc",
+            set the direction to "desc" and run the while loop again. */
+            if (switchCount === 0 && dir === "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
+    }
 }
