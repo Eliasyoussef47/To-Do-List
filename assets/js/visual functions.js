@@ -13,7 +13,7 @@ function makeListItem(dataObj) {// dataObj moet de volgende bevatten: listItemId
     listItem.dataset.listItemId = dataObj.listItemId;
     listItem.dataset.listId = dataObj.listId;
     listItem.dataset.listItemDuration = dataObj.listItemDuration;
-    listItem.dataset.listItemStatus = "0";//standard value
+    listItem.dataset.listItemStatus = (dataObj.listItemStatus !== null ? dataObj.listItemStatus : "0");
     listItemCheckbox = document.createElement("INPUT");
     listItemCheckbox.type = "checkbox";
     listItemCheckbox.className = "custom-control-input listItemCheckbox";
