@@ -22,6 +22,8 @@ class API_model extends CI_Model {
         $this->db->select('`listsItems`.`listItemStatus`');
         $this->db->from('lists');
         $this->db->join('listsItems', 'lists.listId = listsItems.listId', 'left');
+//        $this->db->order_by('listItemId', 'ASC');
+        $this->db->order_by('listId', 'ASC');
         $query = $this->db->get();
 		if ($query->num_rows() > 0) {
 			return $query->result_array();
