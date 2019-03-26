@@ -13,7 +13,7 @@ function makeListItem(dataObj) {// dataObj moet de volgende bevatten: listItemId
     listItem.dataset.listItemId = dataObj.listItemId;
     listItem.dataset.listId = dataObj.listId;
     listItem.dataset.listItemDuration = dataObj.listItemDuration;
-    listItem.dataset.listItemStatus = (dataObj.listItemStatus !== null ? dataObj.listItemStatus : "0");
+    listItem.dataset.listItemStatus = (dataObj.listItemStatus !== null && dataObj.listItemStatus !== undefined ? dataObj.listItemStatus : "0");
     listItemCheckbox = document.createElement("INPUT");
     listItemCheckbox.type = "checkbox";
     listItemCheckbox.className = "custom-control-input listItemCheckbox";
@@ -172,8 +172,6 @@ function makeList(dataObj) {// dataObj moet de volgende bevatten: listId en list
     listItemOptionsBtnWrap.appendChild(listItemOptionsBtnDropdownMenu);
     listHeader.appendChild(listItemEditBtnWrap);
     listHeader.appendChild(listItemOptionsBtnWrap);
-
-
     listConDiv.appendChild(listHeader);
     // currentListId = dataObj.listId;
     listBody = document.createElement("DIV");
